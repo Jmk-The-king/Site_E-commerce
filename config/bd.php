@@ -58,13 +58,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["create"])){
         }
         else{
             $message = "This email adress is already in use, please enter a new one !";
-            header("Location: ../pages/signup.php#revision?message=" .urlencode($message));
+            header("Location: ../pages/signup.php?message=" .urlencode($message));
             exit;
         }
     }
     else{
         $alert = "The two passwords are different, please try egain !";
-            header("Location: ../pages/signup.php#revision?alert=" .urlencode($alert));
+            header("Location: ../pages/signup.php?alert=" .urlencode($alert));
             exit;
     }
 
