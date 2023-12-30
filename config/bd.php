@@ -64,8 +64,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["create"])){
     }
     else{
         $alert = "The two passwords are different, please try egain !";
-            header("Location: ../pages/signup.php?alert=" .urlencode($alert));
-            exit;
+        header("Location: ../pages/signup.php?alert=" .urlencode($alert));
+        exit;
     }
 
     
