@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["create"])){
             try{
                 $stmt -> execute();
                 echo 'Enregistrement effectuer avec success ! ';
-                header("Location: ../pages/login.php");
+                header("Location: ../../pages/login.php");
                 exit;
             }
             catch (PDOException $e){
@@ -58,17 +58,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["create"])){
         }
         else{
             $message = "This email adress is already in use, please enter a new one !";
-            header("Location: ../pages/signup.php?message=" .urlencode($message));
+            header("Location: ../../pages/signup.php?message=" .urlencode($message));
             exit;
         }
     }
     else{
         $alert = "The two passwords are different, please try egain !";
-        header("Location: ../pages/signup.php?alert=" .urlencode($alert));
+        header("Location: ../../pages/signup.php?alert=" .urlencode($alert));
         exit;
-    }
-
-    
+    }    
 }
 
 // Fonctionnalité de Connexion
@@ -84,13 +82,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
 
     while($users=$pdostmt->fetch()){
         if($email == $users["mail"] && $password == $users["pass"]){
-            header("Location: ../pages/index.html");
+            header("Location: ../../pages/index.php");
             exit;
         }
-        $message = "email or password is not correct";
-        header("Location: ../pages/login.php?message=" .urlencode($message));
-        exit;
-    
     }
-
+    $message = "email or password is not correct";
+    header("Location: ../../pages/login.php?message=" .urlencode($message));
+    exit;
 }

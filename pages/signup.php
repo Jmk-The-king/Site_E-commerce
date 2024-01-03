@@ -78,7 +78,7 @@
                         <div class="login_part_form_iner" id="revision">
                             <h3>Welcome ! <br>
                                 Create account now</h3>
-                            <form class="row contact_form" action="../config/bd.php" method="post" enctype="multipart/form-data">
+                            <form class="row contact_form" action="../config/backend/bd.php" method="post" enctype="multipart/form-data">
                                 <div class="col-md-12 form-group p_star">
                                     <input type="text" class="form-control" id="name" name="name" value=""
                                         placeholder="Username" required>

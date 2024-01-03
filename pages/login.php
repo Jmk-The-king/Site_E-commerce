@@ -75,7 +75,7 @@
                         <div class="login_part_form_iner">
                             <h3>Welcome Back ! <br>
                                 Please Sign in now</h3>
-                            <form class="row contact_form" action="../config/bd.php" method="post" enctype="multipart/form-data">
+                            <form class="row contact_form" action="../config/backend/bd.php" method="post" enctype="multipart/form-data">
                                 <div class="col-md-12 form-group p_star">
                                     <input type="email" class="form-control" id="email" name="email" value=""
                                         placeholder="email" required>
