@@ -1,3 +1,13 @@
+<?php
+    Session_start();
+
+    if(!isset($_SESSION["user"])){
+        header("Location: ./login.php");
+        exit;
+    }
+
+?>
+
 <!doctype html>
 <html lang="zxx">
 
@@ -55,7 +65,7 @@
                                 <div class="banner_img d-none d-lg-block">
                                     <img src="../img/banner_img.png" alt="">
                                 </div>
-                            </div>
+                            </div> 
                         </div><div class="single_banner_slider">
                             <div class="row">
                                 <div class="col-lg-5 col-md-8">

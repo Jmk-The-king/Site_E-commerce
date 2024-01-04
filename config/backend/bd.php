@@ -71,6 +71,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["create"])){
 
 // Fonctionnalité de Connexion
 
+Session_start();
+
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
 
     $email = $_POST['email'];
@@ -82,6 +84,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
 
     while($users=$pdostmt->fetch()){
         if($email == $users["mail"] && $password == $users["pass"]){
+            $_SESSION["user"] = $users["username"];
             header("Location: ../../pages/index.php");
             exit;
         }
