@@ -6,6 +6,9 @@
         exit;
     }
 
+    require_once "../config/backend/backend.php";
+    $pdo = new Connect();
+
 ?>
 
 <!doctype html>
@@ -191,10 +194,7 @@
                             <div class="row align-items-center justify-content-between">
 
                                <?php  
-                                    require_once "../config/backend/backend.php";
-                                    $pdo = new Connect();
-
-                                    $prod = "SELECT * from produits";
+                                    $prod = "SELECT * from produits where isvalid = true";
                                     $pdopro = $pdo->prepare($prod);
                                     $pdopro->execute();
 
@@ -202,7 +202,9 @@
                                ?>
                                 <div class="col-lg-3 col-sm-6">
                                     <div class="single_product_item">
-                                        <img src="<?php echo $produit["image"];?>" alt="">
+                                        <a class="" href="single-product.html">
+                                            <img src="<?php echo $produit["image"];?>" alt="">
+                                        </a>
                                         <div class="single_product_text">
                                             <h4><?php echo $produit["nompro"];?></h4>
                                             <h3><?php echo "$ ".$produit["prix"];?></h3>
@@ -353,16 +355,14 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-12">
                     <div class="best_product_slider owl-carousel">
-                        <?php  
-                            require_once "../config/backend/backend.php";
-                            $pdo = new Connect();
-
+                        <?php 
                             $prod = "SELECT * from produits";
                             $pdopro = $pdo->prepare($prod);
                             $pdopro->execute();
 
                             while($produit = $pdopro->fetch()){
                         ?>
+                        <a class="" href="single-product.html">
                         <div class="single_product_item">
                             <img src="<?php echo $produit["image"];?>" alt="">
                             <div class="single_product_text">
@@ -370,6 +370,7 @@
                                 <h3><?php echo "$ ".$produit["prix"];?></h3>
                             </div>
                         </div>
+                        </a>
                         <?php }?>
                      
                     </div>

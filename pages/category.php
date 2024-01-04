@@ -5,6 +5,9 @@
         header("Location: ./login.php");
         exit;
     }
+     
+    require_once "../config/backend/backend.php";
+    $pdo = new Connect();
 
 ?>
 <!doctype html>
@@ -73,13 +76,22 @@
                             <div class="l_w_title">
                                 <h3>Browse Categories</h3>
                             </div>
+
                             <div class="widgets_inner">
                                 <ul class="list">
+                                    <?php
+                                        $cat = "SELECT * FROM categories ";
+                                        $catstmt = $pdo->prepare($cat);
+                                        $catstmt->execute();
+
+                                        while($ctg = $catstmt->fetch()){
+                                    ?>
                                     <li>
-                                        <a href="#">Frozen Fish</a>
+                                        <a href="#"><?php echo $ctg["nomcat"]; ?></a>
                                         <span>(250)</span>
                                     </li>
-                                    <li>
+                                    <?php } ?>
+                                <!--    <li>
                                         <a href="#">Dried Fish</a>
                                         <span>(250)</span>
                                     </li>
@@ -102,7 +114,7 @@
                                     <li>
                                         <a href="#">Meat</a>
                                         <span>(250)</span>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </aside>
@@ -239,31 +251,32 @@
                     </div>
 
                     <div class="row align-items-center latest_product_inner">
-                        <?php  
-                                    require_once "../config/backend/backend.php";
-                                    $pdo = new Connect();
+                        <?php 
+                            $prod = "SELECT * FROM produits WHERE isvalid=true";
+                            if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["search"])){                                        
+                                //$search = ;
+                                $prod = "SELECT * FROM produits WHERE nompro LIKE '%".$_POST["search"]."%' and isvalid=true";//SELECT * FROM `produits` WHERE `nompro`LIKE '%or%'
+                            }
+                            $pdopro = $pdo->prepare($prod);
+                            $pdopro->execute();
 
-                                    $prod = "SELECT * from produits";
-                                    if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["search"])){                                        
-                                        //$search = ;
-                                        $prod = "SELECT * FROM produits WHERE nompro LIKE '%".$_POST["search"]."%'";//SELECT * FROM `produits` WHERE `nompro`LIKE '%or%'
-                                    }
-                                    $pdopro = $pdo->prepare($prod);
-                                    $pdopro->execute();
-
-                                    while($produit = $pdopro->fetch()){
-                               ?>
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="single_product_item">
-                                        <img src="<?php echo $produit["image"];?>" alt="">
-                                        <div class="single_product_text">
-                                            <h4><?php echo $produit["nompro"];?></h4>
-                                            <h3><?php echo "$ ".$produit["prix"];?></h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                        </div>
-                                    </div> 
+                            while($produit = $pdopro->fetch()){
+                        ?>
+                            
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <a class="" href="single-product.html">
+                                    <img src="<?php echo $produit["image"];?>" alt="">
+                                </a>
+                                <div class="single_product_text">
+                                    <h4><?php echo $produit["nompro"];?></h4>
+                                    <h3><?php echo "$ ".$produit["prix"];?></h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                 </div>
-                                <?php   } ?>
+                                
+                            </div> 
+                        </div>
+                        <?php   } ?>
                     </div>
                 </div>
             </div>
@@ -285,22 +298,21 @@
                 <div class="col-lg-12">
                     <div class="best_product_slider owl-carousel">
                         <?php  
-                            require_once "../config/backend/backend.php";
-                            $pdo = new Connect();
-
-                            $prod = "SELECT * from produits";
+                            $prod = "SELECT * from produits WHERE isvalid=true LIMIT 8";
                             $pdopro = $pdo->prepare($prod);
                             $pdopro->execute();
 
                             while($produit = $pdopro->fetch()){
                         ?>
-                        <div class="single_product_item">
-                            <img src="<?php echo $produit["image"];?>" alt="">
-                            <div class="single_product_text">
-                                <h4><?php echo $produit["nompro"];?></h4>
-                                <h3><?php echo "$ ".$produit["prix"];?></h3>
+                        <a class="" href="single-product.html">
+                            <div class="single_product_item">
+                                <img src="<?php echo $produit["image"];?>" alt="">
+                                <div class="single_product_text">
+                                    <h4><?php echo $produit["nompro"];?></h4>
+                                    <h3><?php echo "$ ".$produit["prix"];?></h3>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         <?php }?>
                     </div>
                 </div>
