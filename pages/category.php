@@ -90,30 +90,6 @@
                                         <span>(<?php echo $ctg["somme_quantite"]; ?>)</span>
                                     </li>
                                     <?php } ?>
-                                <!--    <li>
-                                        <a href="#">Dried Fish</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fresh Fish</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat Alternatives</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fresh Fish</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat Alternatives</a>
-                                        <span>(250)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Meat</a>
-                                        <span>(250)</span>
-                                    </li> -->
                                 </ul>
                             </div>
                         </aside>
@@ -259,7 +235,7 @@
                             
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <a class="" href="single-product.html">
+                                <a class="" href="single-product.php">
                                     <img src="<?php echo $produit["image"];?>" alt="">
                                 </a>
                                 <div class="single_product_text">
@@ -297,7 +273,7 @@
 
                             while($produit = $pdopro->fetch()){
                         ?>
-                        <a class="" href="single-product.html">
+                        <a class="" href="single-product.php">
                             <div class="single_product_item">
                                 <img src="<?php echo $produit["image"];?>" alt="">
                                 <div class="single_product_text">
