@@ -235,7 +235,7 @@
                             
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <a class="" href="single-product.php">
+                                <a class="" href="single-product.php?<?php echo 'idpro='.$produit['idpro'];?>">
                                     <img src="<?php echo $produit["image"];?>" alt="">
                                 </a>
                                 <div class="single_product_text">
@@ -273,7 +273,7 @@
 
                             while($produit = $pdopro->fetch()){
                         ?>
-                        <a class="" href="single-product.php">
+                        <a class="" href="single-product.php?<?php echo 'idpro='.$produit['idpro'];?>">
                             <div class="single_product_item">
                                 <img src="<?php echo $produit["image"];?>" alt="">
                                 <div class="single_product_text">

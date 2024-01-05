@@ -9,6 +9,7 @@
     require_once "../config/backend/backend.php";
     $pdo = new Connect();
 
+    $idpro = $_GET["idpro"];
 ?>
 <!doctype html>
 <html lang="zxx">
@@ -77,48 +78,64 @@
   <!-- breadcrumb start-->
   <!--================End Home Banner Area =================-->
 
+  <?php
+            $query = $query . $idpro;
+            $pdostmt=$pdo->prepare($query);
+            $pdostmt->bindParam(':code',$idpro);
+            $pdostmt->execute();
+
+            $produit=$pdostmt->fetch(PDO::FETCH_ASSOC);
+
+            // $views="update articles set vues=:view where code=:code";
+            // $vustmt = $pdo->prepare($views);
+            // $vustmt->execute(['code'=>$produit['code'],"view"=>$produit['vues']+1]);
+
+            if($produit){
+
+        ?>
+
   <!--================Single Product Area =================-->
   <div class="product_image_area section_padding">
     <div class="container">
       <div class="row s_product_inner justify-content-between product product-details clearfix">
-        <div class="col-lg-7 col-xl-7">
+        <div class="col-lg-6 col-xl-6">
           <div id="product-main-view">
             <div class="product-view">
-              <img src="../img/product/single-product/product_1.png" alt="">
+              <img src="<?php echo $produit["miniature"]; ?>" alt="">
             </div>
             <div class="product-view">
-              <img src="../img/product/single-product/product_1.png" alt="">
+              <img src="<?php echo $produit["miniature"]; ?>" alt="">
             </div>
             <div class="product-view">
-              <img src="../img/product/single-product/product_1.png" alt="">
+              <img src="<?php echo $produit["miniature"]; ?>" alt="">
             </div>
             <div class="product-view">
-              <img src="../img/product/single-product/product_1.png" alt="">
+              <img src="<?php echo $produit["miniature"]; ?>" alt="">
             </div>
           </div>
           <div id="product-view">
             <div class="product-view">
-              <img src="../img/product/single-product/min_product_1.png" alt="">
+              <img src="<?php echo $produit["image"]; ?>" alt="">
             </div>
             <div class="product-view">
-              <img src="../img/product/single-product/min_product_1.png" alt="">
+              <img src="<?php echo $produit["image"]; ?>" alt="">
             </div>
             <div class="product-view">
-              <img src="../img/product/single-product/min_product_1.png" alt="">
+              <img src="<?php echo $produit["image"]; ?>" alt="">
             </div>
             <div class="product-view">
-              <img src="../img/product/single-product/min_product_1.png" alt="">
+              <img src="<?php echo $produit["image"]; ?>" alt="">
             </div>
           </div>
           </div>
-          <div class="col-lg-5 col-xl-4">
+          <div class="col-lg-6 col-xl-5">
             <div class="s_product_text">
               <div class="product-label">
 								<span>New</span> | 
 								<span class="sale">-20%</span>
 							</div>
-              <h3>Faded SkyBlu Denim Jeans</h3>
-              <h2>$149.99</h2>
+              <h3><?php echo $produit['nom'];?></h3>
+              <h2><?php echo $produit['prix'];?></h2>
               <div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
@@ -127,20 +144,19 @@
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-o empty"></i>
 								</div>
-								<a href="#">3 Review(s) / Add Review</a>
+								<a href="#review">3 Review(s) / Add Review</a>
 							</div>
               <ul class="list">
                 <li>
                   <a class="active" href="#">
-                    <span>Category</span> : Household</a>
+                    <span>Category</span> : <?php echo $produit['categorie'];?></a>
                 </li>
                 <li>
-                  <a href="#"> <span>Availibility</span> : In Stock</a>
+                  <a href="#"> <span>Availibility</span> : <?php $valid = ($produit['validity'])? "En stock" : "Stock epuié"; echo $valid;?></a>
                 </li>
               </ul>
               <p>
-                First replenish living. Creepeth image image. Creeping can't, won't called.
-                Two fruitful let days signs sea together all land fly subdue
+                <?php echo $produit["description"]; ?>
               </p>
               <div class="product-options">
 								<ul class="size-option">
@@ -174,6 +190,13 @@
   </div>
   <!--================End Single Product Area =================-->
 
+  <?php }
+          else{
+            echo 'produit non trouvé !';
+          }
+        
+        ?>
+
   <!--================Product Description Area =================-->
   <section class="product_description_area">
     <div class="container">
@@ -197,35 +220,7 @@
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <p>
-            Beryl Cook is one of Britain's most talented and amusing artists
-            .Beryl's pictures feature women of all shapes and sizes enjoying
-            themselves .Born between the two world wars, Beryl Cook eventually
-            left Kendrick School in Reading at the age of 15, where she went
-            to secretarial school and then into an insurance office. After
-            moving to London and then Hampton, she eventually married her next
-            door neighbour from Reading, John Cook. He was an officer in the
-            Merchant Navy and after he left the sea in 1956, they bought a pub
-            for a year before John took a job in Southern Rhodesia with a
-            motor company. Beryl bought their young son a box of watercolours,
-            and when showing him how to use it, she decided that she herself
-            quite enjoyed painting. John subsequently bought her a child's
-            painting set for her birthday and it was with this that she
-            produced her first significant work, a half-length portrait of a
-            dark-skinned lady with a vacant expression and large drooping
-            breasts. It was aptly named 'Hangover' by Beryl's husband and
-          </p>
-          <p>
-            It is often frustrating to attempt to plan meals that are designed
-            for one. Despite this fact, we are seeing more and more recipe
-            books and Internet websites that are dedicated to the act of
-            cooking for one. Divorce and the death of spouses or grown
-            children leaving for college are all reasons that someone
-            accustomed to cooking for more than one would suddenly need to
-            learn how to adjust all the cooking practices utilized before into
-            a streamlined plan of cooking that is more efficient for one
-            person creating less
-          </p>
+            <?php echo $produit["description"]; ?>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <div class="table-responsive">
@@ -607,7 +602,7 @@
 
                 while($produit = $pdopro->fetch()){
             ?>
-            <a class="" href="single-product.php">
+            <a class="" href="single-product.php?<?php echo 'idpro='.$produit['idpro'];?>">
                 <div class="single_product_item">
                     <img src="<?php echo $produit["image"];?>" alt="">
                     <div class="single_product_text">
