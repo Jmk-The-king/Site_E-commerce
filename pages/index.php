@@ -194,8 +194,7 @@
                             <div class="row align-items-center justify-content-between">
 
                                <?php  
-                                    $prod = "SELECT * from produits where isvalid = true";
-                                    $pdopro = $pdo->prepare($prod);
+                                    $pdopro = $pdo->prepare($prod1);
                                     $pdopro->execute();
 
                                     while($produit = $pdopro->fetch()){
@@ -356,8 +355,7 @@
                 <div class="col-lg-12">
                     <div class="best_product_slider owl-carousel">
                         <?php 
-                            $prod = "SELECT * from produits";
-                            $pdopro = $pdo->prepare($prod);
+                            $pdopro = $pdo->prepare($prod2);
                             $pdopro->execute();
 
                             while($produit = $pdopro->fetch()){

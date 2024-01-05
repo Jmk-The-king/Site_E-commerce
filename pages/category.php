@@ -80,15 +80,14 @@
                             <div class="widgets_inner">
                                 <ul class="list">
                                     <?php
-                                        $cat = "SELECT * FROM categories ";
                                         $catstmt = $pdo->prepare($cat);
                                         $catstmt->execute();
 
                                         while($ctg = $catstmt->fetch()){
                                     ?>
                                     <li>
-                                        <a href="#"><?php echo $ctg["nomcat"]; ?></a>
-                                        <span>(250)</span>
+                                        <a href="#"><?php echo $ctg["nom_categorie"]; ?></a>
+                                        <span>(<?php echo $ctg["somme_quantite"]; ?>)</span>
                                     </li>
                                     <?php } ?>
                                 <!--    <li>
@@ -252,11 +251,6 @@
 
                     <div class="row align-items-center latest_product_inner">
                         <?php 
-                            $prod = "SELECT * FROM produits WHERE isvalid=true";
-                            if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["search"])){                                        
-                                //$search = ;
-                                $prod = "SELECT * FROM produits WHERE nompro LIKE '%".$_POST["search"]."%' and isvalid=true";//SELECT * FROM `produits` WHERE `nompro`LIKE '%or%'
-                            }
                             $pdopro = $pdo->prepare($prod);
                             $pdopro->execute();
 
@@ -298,8 +292,7 @@
                 <div class="col-lg-12">
                     <div class="best_product_slider owl-carousel">
                         <?php  
-                            $prod = "SELECT * from produits WHERE isvalid=true LIMIT 8";
-                            $pdopro = $pdo->prepare($prod);
+                            $pdopro = $pdo->prepare($prod2);
                             $pdopro->execute();
 
                             while($produit = $pdopro->fetch()){
