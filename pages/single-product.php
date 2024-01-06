@@ -295,8 +295,8 @@
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <div class="row">
             <?php
-                $comment = $comment . $idpro ." LIMIT 3";
-                $stmtcom = $pdo -> prepare($comment);
+                $comment0 = $comment . $idpro ." LIMIT 3";
+                $stmtcom = $pdo -> prepare($comment0);
                 $stmtcom -> execute();
 
                 while($com = $stmtcom -> fetch()){
@@ -416,7 +416,11 @@
               </div>
               <div class="review_list">
               <?php
-                while($comm = $stmtcom -> fetch()){
+                $comment1 = $comment . $idpro ." LIMIT 3";
+                $stmtc = $pdo -> prepare($comment1);
+                $stmtc -> execute();
+
+                while($comm = $stmtc -> fetch()){
               ?>
                 <div class="review_item">
                   <div class="media">
