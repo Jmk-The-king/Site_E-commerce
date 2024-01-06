@@ -17,6 +17,8 @@ class Connect extends PDO{
     }
 }
 
+$pdo = new Connect();
+
 // variables utilisées dans index.php 
 
 $prod1 = "SELECT * from produits where isvalid = true";
@@ -34,5 +36,38 @@ $prod2 = "SELECT * from produits WHERE isvalid=true LIMIT 8";
 
 // variable pour sigle-product
 
-$query="SELECT * from articles WHERE idpro=:id";
+$query="SELECT * from produits WHERE idpro=:id";
 $query="SELECT produits.nompro AS nom, produits.prix AS prix, produits.quantite AS quantite, produits.description AS 'description', produits.image AS 'image', produits.isvalid AS validity, produits.imagemini AS miniature, categories.nomcat AS categorie FROM `produits` INNER JOIN categories ON produits.category = categories.category WHERE idpro=";
+// $views="update articles set vues=:view where code=:code";
+
+
+// Commentaire sur les produits 
+
+if($_SERVER["REQUEST"] = "POST" && isset($_POST["submit"])){
+    $idprod = $_GET["idpro"];
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $number = $_POST["number"];
+    $message = $_POST["message"];
+
+    $insertcom = "INSERT INTO `commentaire`(`idpro`, `nomcomplet`, `adressmail`, `phone`, `commentaire`) VALUES (:idpro,:nomcomplet,:email,:phone,:commentaire)";
+    $stmt = $pdo->prepare($insertcom);
+    $stmt -> bindParam(":idpro", $idprod);
+    $stmt -> bindParam(":nomcomplet", $name);
+    $stmt -> bindParam(":email", $email);
+    $stmt -> bindParam(":phone", $number);
+    $stmt -> bindParam(":commentaire", $message);
+
+    try{
+        $stmt -> execute();
+        echo 'Enregistrement effectuer avec success ! ';
+        header("Location: ../../pages/single-product.php?idpro=".urlencode($_GET["idpro"]));
+        exit;
+    }
+    catch (PDOException $e){
+        echo "Erreur lors de l'enrgistrement : " . $e->getMessage().' '.$e->getFiles().' '.$e->getLine();
+    }
+    
+}
+
+$comment = "SELECT `comid`, `idpro`, `nomcomplet`, `adressmail`, `phone`, `commentaire`, `time` FROM `commentaire` WHERE idpro = "; 

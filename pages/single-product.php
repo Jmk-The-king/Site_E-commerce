@@ -1,15 +1,15 @@
 <?php
     Session_start();
 
-    if(!isset($_SESSION["user"])){
+    if(!isset($_SESSION["user"]) ){
         header("Location: ./login.php");
         exit;
     }
+    $idpro = $_GET["idpro"];
      
     require_once "../config/backend/backend.php";
     $pdo = new Connect();
 
-    $idpro = $_GET["idpro"];
 ?>
 <!doctype html>
 <html lang="zxx">
@@ -86,7 +86,6 @@
 
             $produit=$pdostmt->fetch(PDO::FETCH_ASSOC);
 
-            // $views="update articles set vues=:view where code=:code";
             // $vustmt = $pdo->prepare($views);
             // $vustmt->execute(['code'=>$produit['code'],"view"=>$produit['vues']+1]);
 
@@ -194,7 +193,6 @@
           else{
             echo 'produit non trouvé !';
           }
-        
         ?>
 
   <!--================Product Description Area =================-->
@@ -296,6 +294,13 @@
         </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <div class="row">
+            <?php
+                $comment = $comment . $idpro ." LIMIT 3";
+                $stmtcom = $pdo -> prepare($comment);
+                $stmtcom -> execute();
+
+                while($com = $stmtcom -> fetch()){
+            ?>
             <div class="col-lg-6">
               <div class="comment_list">
                 <div class="review_item">
@@ -304,60 +309,22 @@
                       <img src="../img/product/single-product/review-1.png" alt="" />
                     </div>
                     <div class="media-body">
-                      <h4>Blake Ruiz</h4>
-                      <h5>12th Feb, 2017 at 05:56 pm</h5>
+                      <h4><?php echo $com["nomcomplet"]; ?></h4>
+                      <h5><?php echo $com["time"]; ?></h5>
                       <a class="reply_btn" href="#">Reply</a>
                     </div>
                   </div>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo
-                  </p>
-                </div>
-                <div class="review_item reply">
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="../img/product/single-product/review-2.png" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <h4>Blake Ruiz</h4>
-                      <h5>12th Feb, 2017 at 05:56 pm</h5>
-                      <a class="reply_btn" href="#">Reply</a>
-                    </div>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo
-                  </p>
-                </div>
-                <div class="review_item">
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="../img/product/single-product/review-3.png" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <h4>Blake Ruiz</h4>
-                      <h5>12th Feb, 2017 at 05:56 pm</h5>
-                      <a class="reply_btn" href="#">Reply</a>
-                    </div>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo
+                    <?php echo $com["commentaire"]; ?>
                   </p>
                 </div>
               </div>
             </div>
+            <?php } ?>
             <div class="col-lg-6">
               <div class="review_box">
                 <h4>Post a comment</h4>
-                <form class="row contact_form" action="contact_process.php" method="post" id="contactForm"
+                <form class="row contact_form" action="../config/backend/backend.php?<?php echo 'idpro='.$idpro;?>" method="post" id="contactForm"
                   novalidate="novalidate">
                   <div class="col-md-12">
                     <div class="form-group">
@@ -381,9 +348,7 @@
                     </div>
                   </div>
                   <div class="col-md-12 text-right">
-                    <button type="submit" value="submit" class="btn_3">
-                      Submit Now
-                    </button>
+                      <input type="submit" class="btn_3" id="submit" name="submit" value="Submit now"/>
                   </div>
                 </form>
               </div>
@@ -450,13 +415,16 @@
                 </div>
               </div>
               <div class="review_list">
+              <?php
+                while($comm = $stmtcom -> fetch()){
+              ?>
                 <div class="review_item">
                   <div class="media">
                     <div class="d-flex">
                       <img src="../img/product/single-product/review-1.png" alt="" />
                     </div>
                     <div class="media-body">
-                      <h4>Blake Ruiz</h4>
+                      <h4><?php echo $comm["nomcomplet"]; ?></h4>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -465,54 +433,10 @@
                     </div>
                   </div>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo
+                    <?php echo $comm["commentaire"]; ?>
                   </p>
                 </div>
-                <div class="review_item">
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="../img/product/single-product/review-2.png" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <h4>Blake Ruiz</h4>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo
-                  </p>
-                </div>
-                <div class="review_item">
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="../img/product/single-product/review-3.png" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <h4>Blake Ruiz</h4>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo
-                  </p>
-                </div>
+                <?php } ?>
               </div>
             </div>
             <div class="col-lg-6">
@@ -547,7 +471,7 @@
                   </li>
                 </ul>
                 <p>Outstanding</p>
-                <form class="row contact_form" action="contact_process.php" method="post" novalidate="novalidate">
+                <form class="row contact_form" action="../config/backend/backend.php?<?php echo 'idpro='.$idpro;?>" method="post" novalidate="novalidate">
                   <div class="col-md-12">
                     <div class="form-group">
                       <input type="text" class="form-control" name="name" placeholder="Your Full name" />
@@ -569,9 +493,7 @@
                     </div>
                   </div>
                   <div class="col-md-12 text-right">
-                    <button type="submit" value="submit" class="btn_3">
-                      Submit Now
-                    </button>
+                      <input type="submit" class="btn_3" id="submit" name="submit" value="Submit now"/>
                   </div>
                 </form>
               </div>
