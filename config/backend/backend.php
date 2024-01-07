@@ -71,3 +71,4 @@ if($_SERVER["REQUEST"] = "POST" && isset($_POST["submit"])){
 }
 
 $comment = "SELECT `comid`, `idpro`, `nomcomplet`, `adressmail`, `phone`, `commentaire`, `time` FROM `commentaire` WHERE idpro = "; 
+0
