@@ -21,7 +21,7 @@ class Connect extends PDO{
 
 $pdo = new Connect();
 
-// Ajout au panier 
+// Ajout au panier  
 
 if(isset($_SESSION['user']) && isset($_GET['idpro'])){
     $idu = $_SESSION['user'];
