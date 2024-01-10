@@ -45,7 +45,7 @@ if(isset($_SESSION['user']) && isset($_GET['idpro'])){
     try{ 
         $cardstmt -> execute();
         echo 'Enregistrement effectués avec success ! ';
-    //  header("Location: ../../pages/index.php");
+        header("Location: ../../pages/index.php");
         exit;
     } catch (PDOException $e){
         echo "Erreur lors de l'enrgistrement : " . $e->getMessage().' '.$e->getFiles().' '.$e->getLine();
