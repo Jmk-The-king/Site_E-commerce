@@ -207,7 +207,7 @@
                                         <div class="single_product_text">
                                             <h4><?php echo $produit["nompro"];?></h4>
                                             <h3><?php echo "$ ".$produit["prix"];?></h3>
-                                            <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                            <a href="../config/backend/bd.php?<?php echo ' idpro='.$produit['idpro'];?>" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
                                         </div>
                                     </div> 
                                 </div>

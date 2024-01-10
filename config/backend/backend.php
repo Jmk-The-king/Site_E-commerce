@@ -19,11 +19,37 @@ class Connect extends PDO{
 
 $pdo = new Connect();
 
-// variables utilisées dans index.php 
+// Ajout au panier 
+
+if(isset($_GET['id']) && isset($_GET['idpro'])){
+    $idu = $_GET['id'];
+    $idpro = $_GET['idpro'];
+
+    $card = "SELECT  `nompro`, `prix`, `imagemini` FROM `produits` WHERE idpro =".$idpro;
+    $pdostmt=$pdo->prepare($card);
+    $pdostmt->bindParam(':code',$idpro);
+    $pdostmt->execute();
+
+    $produit=$pdostmt->fetch(PDO::FETCH_ASSOC);
+
+    $insertcard = "INSERT INTO `panier`(`id`, `idpro`, `prixunitaire`) VALUES (:id,:idpro,:prix)";
+    $cardstmt = $pdo -> prepare($insertcard);
+    $cardstmt -> bindParam(':id', $idu);
+    $cardstmt -> bindParam(':idpro', $idpro);
+    $cardstmt -> bindParam(':prix', $produit['prix']);
+
+    $cardstmt -> execute();
+    echo 'Enregistrement effectués avec success ! ';
+    header("Location: ../../pages/index.php");
+    exit;
+    
+}
+
+// Requetes utilisées dans index.php 
 
 $prod1 = "SELECT * from produits where isvalid = true";
 
-// variables utilisées dans category.php
+// Requetes utilisées dans category.php
 
 $cat = "SELECT categories.nomcat AS nom_categorie, SUM(IFNULL(produits.quantite, 0)) AS somme_quantite FROM produits INNER JOIN categories ON produits.category = categories.category GROUP BY categories.category, categories.nomcat";
 
@@ -34,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["search"])){
 }  
 $prod2 = "SELECT * from produits WHERE isvalid=true LIMIT 8";
 
-// variable pour sigle-product
+// Requete pour sigle-product
 
 $query="SELECT * from produits WHERE idpro=:id";
 $query="SELECT produits.nompro AS nom, produits.prix AS prix, produits.quantite AS quantite, produits.description AS 'description', produits.image AS 'image', produits.isvalid AS validity, produits.imagemini AS miniature, categories.nomcat AS categorie FROM `produits` INNER JOIN categories ON produits.category = categories.category WHERE idpro=";
@@ -70,5 +96,11 @@ if($_SERVER["REQUEST"] = "POST" && isset($_POST["submit"])){
     
 }
 
+// requete utilisées pour afficher les commentaires 
+
 $comment = "SELECT `comid`, `idpro`, `nomcomplet`, `adressmail`, `phone`, `commentaire`, `time` FROM `commentaire` WHERE idpro = "; 
-0
+
+
+  
+
+//$panier = "SELECT `idpro`, `nompro`, `prix`,`image`, `isvalid`, `imagemini` FROM `produits` WHERE isvalid=true AND id";

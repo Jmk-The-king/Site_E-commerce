@@ -29,7 +29,6 @@
 <body>
     <!--::header part start::-->
     <?php
-        require_once '../config/include/header.php';
         $message ="";
         $alert = "";
         if(isset($_GET["message"])){
@@ -60,7 +59,7 @@
     <!-- breadcrumb start-->
 
     <!--================login_part Area =================-->
-    <section class="login_part padding_top">
+    <section class="login_part ">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
@@ -113,11 +112,6 @@
     </section>
     <!--================login_part end =================-->
 
-    <!--::footer_part start::-->
-   <?php
-        require_once '../Config/include/footer.php';
-   ?>
-    <!--::footer_part end::-->
 
     <!-- jquery plugins here-->
     <!-- jquery -->

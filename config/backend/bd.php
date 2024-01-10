@@ -1,5 +1,7 @@
 <?php
 
+Session_start();
+
 class Connect extends PDO{
     const HOST='localhost';
     const DB='Test01';
@@ -18,6 +20,38 @@ class Connect extends PDO{
 }
 
 $pdo = new Connect();
+
+// Ajout au panier 
+
+if(isset($_SESSION['user']) && isset($_GET['idpro'])){
+    $idu = $_SESSION['user'];
+    $idpro = $_GET['idpro'];
+
+    $card = "SELECT `prix` FROM `produits` WHERE idpro =".$idpro;
+    $pdostmt=$pdo->prepare($card);
+    $pdostmt->bindParam(':code',$idpro);
+    $pdostmt->execute();
+
+    $prod=$pdostmt->fetch(PDO::FETCH_ASSOC);
+
+    echo $prod['prix']. $idu . $idpro;
+
+    $insertcard = "INSERT INTO `panier`(`id`, `idpro`, `prixunitaire`) VALUES (:id,:idpro,:prix)";
+    $cardstmt = $pdo->prepare($insertcard);
+    $cardstmt -> bindParam(':id', $idu);
+    $cardstmt -> bindParam(':idpro', $idpro);
+    $cardstmt -> bindParam(':prix', $prod['prix']);
+
+    try{ 
+        $cardstmt -> execute();
+        echo 'Enregistrement effectués avec success ! ';
+    //  header("Location: ../../pages/index.php");
+        exit;
+    } catch (PDOException $e){
+        echo "Erreur lors de l'enrgistrement : " . $e->getMessage().' '.$e->getFiles().' '.$e->getLine();
+    }
+    
+}
 
 // Fonctionnalité d'inscription 
 
@@ -84,7 +118,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
 
     while($users=$pdostmt->fetch()){
         if($email == $users["mail"] && $password == $users["pass"]){
-            $_SESSION["user"] = $users["username"];
+            $_SESSION["user"] = $users["id"];
             header("Location: ../../pages/index.php");
             exit;
         }

@@ -29,7 +29,6 @@
 <body>
     <!--::header part start::-->
     <?php
-        require_once '../config/include/header.php';
         $message ="";
         if(isset($_GET["message"])){
             $message = $_GET["message"];
@@ -46,8 +45,8 @@
                 <div class="col-lg-8">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <h2>Tracking Order</h2>
-                            <p>Home <span>-</span> Tracking Order</p>
+                            <h2>Sign in </h2>
+                            <p>Home <span>-</span> Sign in</p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +56,7 @@
     <!-- breadcrumb start-->
 
     <!--================login_part Area =================-->
-    <section class="login_part padding_top">
+    <section class="login_part" style="padding: 50px;">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
@@ -72,7 +71,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="login_part_form">
-                        <div class="login_part_form_iner">
+                        <div class="login_part_form_iner" id="revision">
                             <h3>Welcome Back ! <br>
                                 Please Sign in now</h3>
                             <form class="row contact_form" action="../config/backend/bd.php" method="post" enctype="multipart/form-data">
@@ -103,9 +102,7 @@
     <!--================login_part end =================-->
 
    <!--::footer_part start::-->
-   <?php
-        require_once '../Config/include/footer.php';
-   ?>
+   
     <!--::footer_part end::-->
 
     <!-- jquery plugins here-->
