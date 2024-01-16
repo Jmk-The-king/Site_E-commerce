@@ -27,30 +27,48 @@ if(isset($_SESSION['user']) && isset($_GET['idpro'])){
     $idu = $_SESSION['user'];
     $idpro = $_GET['idpro'];
 
-    $card = "SELECT `prix` FROM `produits` WHERE idpro =".$idpro;
-    $pdostmt=$pdo->prepare($card);
-    $pdostmt->bindParam(':code',$idpro);
-    $pdostmt->execute();
+    //echo $prod['prix']. $idu . $idpro;
 
-    $prod=$pdostmt->fetch(PDO::FETCH_ASSOC);
+    $prodverif = "SELECT * FROM panier";
+    $verif = $pdo -> prepare($prodverif);
+    $verif -> execute();
 
-    echo $prod['prix']. $idu . $idpro;
-
-    $insertcard = "INSERT INTO `panier`(`id`, `idpro`, `prixunitaire`) VALUES (:id,:idpro,:prix)";
-    $cardstmt = $pdo->prepare($insertcard);
-    $cardstmt -> bindParam(':id', $idu);
-    $cardstmt -> bindParam(':idpro', $idpro);
-    $cardstmt -> bindParam(':prix', $prod['prix']);
-
-    try{ 
-        $cardstmt -> execute();
-        echo 'Enregistrement effectués avec success ! ';
+    $verification = false;
+    while($pan = $verif -> fetch()){
+        if($pan["id"] === $idu && $pan["idpro"] === $idpro){
+            return $verification = true;
+            break;
+        }
+    }
+    if ($verification == true){
+        echo 'Le produit est déjà dans le panier ! ';
         header("Location: ../../pages/index.php");
         exit;
-    } catch (PDOException $e){
-        echo "Erreur lors de l'enrgistrement : " . $e->getMessage().' '.$e->getFiles().' '.$e->getLine();
     }
-    
+    else {
+        $card = "SELECT `prix` FROM `produits` WHERE idpro =".$idpro;
+        $pdostmt=$pdo -> prepare($card);
+        $pdostmt->bindParam(':code',$idpro);
+        $pdostmt->execute();
+
+        $prod=$pdostmt->fetch(PDO::FETCH_ASSOC);
+
+        $insertcard = "INSERT INTO `panier`(`id`, `idpro`, `prixunitaire`) VALUES (:id,:idpro,:prix)";
+        $cardstmt = $pdo->prepare($insertcard);
+        $cardstmt -> bindParam(':id', $idu);
+        $cardstmt -> bindParam(':idpro', $idpro);
+        $cardstmt -> bindParam(':prix', $prod['prix']);
+
+        try{ 
+            $cardstmt -> execute();
+            echo 'Enregistrement effectués avec success ! ';
+            header("Location: ../../pages/index.php");
+            exit;
+        } catch (PDOException $e){
+            echo "Erreur lors de l'enrgistrement : " . $e->getMessage().' '.$e->getFiles().' '.$e->getLine();
+        }
+    }
+ 
 }
 
 // Fonctionnalité d'inscription 
