@@ -39,6 +39,23 @@
   <link rel="stylesheet" href="../css/price_rangs.css">
   <!-- style CSS -->
   <link rel="stylesheet" href="../css/style.css">
+  
+  <style>
+        .main_menu .cart i:after {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #f13d80;
+            width: 14px;
+            height: 14px;
+            right: -8px;
+            top: -8px;
+            content: "<?php if($counter["COUNT(*)"] != 0){ echo $counter["COUNT(*)"]; } ?>";
+            text-align: center;
+            line-height: 15px;
+            font-size: 10px;
+            color: #fff;
+            }
+    </style>
 </head>
 
 <body>
@@ -87,94 +104,53 @@
             ?>
 
             <tbody>
+            <?php
+              $panstmt = $pdo -> prepare($paniers);
+              $panstmt -> execute();
+              $subtotal = 0;
+
+              while($prodpanier = $panstmt -> fetch()){
+                $prodstmt = $pdo -> prepare($panier.$prodpanier['idpro']);
+                $prodstmt -> execute ();
+
+                $prodpan = $prodstmt -> fetch(PDO::FETCH_ASSOC);
+            ?>
               <tr>
                 <td>
                   <div class="media">
                     <div class="d-flex">
-                      <img src="../img/product/single-product/cart-1.jpg" alt="" />
+                      <img style="width: 100px;" src="<?php echo $prodpan["image"]; ?>" alt="" />
                     </div>
                     <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
+                      <p><?php echo $prodpan["nompro"]; ?></p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <h5>$360.00</h5>
+                  <h5><?php echo $prodpan["prix"]; ?></h5>
                 </td>
                 <td>
                   <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
+                    <form method="post" action="">
+                      <button class="input-number-decrement btn" name="btnDecrement"> <i class="ti-angle-down"></i></button>
+                      <input class="input-number" type="text" value="<?php echo $prodpanier["qte"]; ?>" min="0" max="100" name="qte" id="qte">
+                      <button class="input-number-increment btn" name="btnIncrement"> <i class="ti-angle-up"></i></button>
+                    </form>
                   </div>
                 </td>
                 <td>
-                  <h5>$720.00</h5>
+                  <h5><?php 
+                    $total = $prodpan["prix"] * $prodpanier["qte"];
+                    echo $total;
+                    $subtotal = $subtotal + $total;
+                  ?></h5>
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="../img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <!-- <input type="text" value="1" min="0" max="10" title="Quantity:"
-                      class="input-text qty input-number" />
-                    <button
-                      class="increase input-number-increment items-count" type="button">
-                      <i class="ti-angle-up"></i>
-                    </button>
-                    <button
-                      class="reduced input-number-decrement items-count" type="button">
-                      <i class="ti-angle-down"></i>
-                    </button> -->
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="../img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
+              <?php } ?>
+         
               <tr class="bottom_button">
                 <td>
-                  <a class="btn_1" href="#">Update Cart</a>
+                  <a class="btn_1" href="../config/backend/back.php">Update Cart</a>
                 </td>
                 <td></td>
                 <td></td>
@@ -191,7 +167,7 @@
                   <h5>Subtotal</h5>
                 </td>
                 <td>
-                  <h5>$2160.00</h5>
+                  <h5>$<?php echo $subtotal; ?></h5>
                 </td>
               </tr>
               <tr class="shipping_area">
@@ -238,7 +214,7 @@
             </tbody>
           </table>
           <div class="checkout_btn_inner float-right">
-            <a class="btn_1" href="#">Continue Shopping</a>
+            <a class="btn_1" href="category.php">Continue Shopping</a>
             <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
           </div>
         </div>

@@ -2250,20 +2250,7 @@ ul {
 }
 
 /* line 130, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
-.main_menu .cart i:after {
-  position: absolute;
-  border-radius: 50%;
-  background-color: #f13d80;
-  width: 14px;
-  height: 14px;
-  right: -8px;
-  top: -8px;
-  content: "5";
-  text-align: center;
-  line-height: 15px;
-  font-size: 10px;
-  color: #fff;
-}
+
 
 /* line 151, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_menu.scss */
 .menu_fixed {
@@ -3773,8 +3760,8 @@ ul {
   background: #e8eff1;
   background: linear-gradient(to bottom, #e8eff1 -50%, #e8eff1 150%);
   border: 1px solid #e8eff1;
-  border-radius: 16px;
   -moz-border-radius: 16px;
+  border-radius: 16px;
 }
 
 /* line 525, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
@@ -5250,7 +5237,7 @@ ul {
   height: 14px;
   z-index: 9;
   cursor: pointer;
-  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   color: #2a2a2a;
@@ -5271,8 +5258,8 @@ ul {
   left: 0px;
   background: #fff;
   z-index: 5;
-  transition: border 0.25s linear;
   -webkit-transition: border 0.25s linear;
+  transition: border 0.25s linear;
 }
 
 /* line 1857, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
@@ -5286,8 +5273,8 @@ ul {
   top: 4px;
   left: 4px;
   margin: auto;
-  transition: background 0.25s linear;
   -webkit-transition: background 0.25s linear;
+  transition: background 0.25s linear;
 }
 
 /* line 1871, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
@@ -5335,12 +5322,24 @@ ul {
   vertical-align: middle;
 }
 
-/* line 1901, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
-.login_part .login_part_text {
+.login_part .login_part_text_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: -moz-linear-gradient(16deg, #ff005a 0%, #ff5d2d 64%, #ffba00 100%);
   background-image: -webkit-linear-gradient(16deg, #ff005a 0%, #ff5d2d 64%, #ffba00 100%);
   background-image: -ms-linear-gradient(16deg, #ff005a 0%, #ff5d2d 64%, #ffba00 100%);
   background-size: 200% auto;
+  opacity: 0.5;
+}
+
+/* line 1901, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
+.login_part .login_part_text {
+  position: relative;
+  background-image: url(../img/product/login.jpg);
+  background-size: cover;
 }
 
 /* line 1906, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */

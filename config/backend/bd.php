@@ -26,6 +26,7 @@ $pdo = new Connect();
 if(isset($_SESSION['user']) && isset($_GET['idpro'])){
     $idu = $_SESSION['user'];
     $idpro = $_GET['idpro'];
+    $qte = 1;
 
     //echo $prod['prix']. $idu . $idpro;
 
@@ -36,14 +37,22 @@ if(isset($_SESSION['user']) && isset($_GET['idpro'])){
     $verification = false;
     while($pan = $verif -> fetch()){
         if($pan["id"] === $idu && $pan["idpro"] === $idpro){
-            return $verification = true;
+            $verification = true;
             break;
         }
     }
     if ($verification == true){
-        echo 'Le produit est déjà dans le panier ! ';
-        header("Location: ../../pages/index.php");
-        exit;
+        $qteupdate = "UPDATE `panier` SET `qte`=:qte WHERE idpro = :idpro";
+        $vustmt = $pdo->prepare($qteupdate);
+
+        try{
+            $vustmt->execute(['idpro'=>$pan['idpro'],"qte"=>$pan['qte']+1]);
+            echo 'Produit ajouté au panier avec succès ! ';
+            header("Location: ../../pages/index.php");
+            exit;
+        } catch (PDOException $e){
+            echo "Erreur lors de l'enrgistrement : " . $e->getMessage().' '.$e->getFiles().' '.$e->getLine();
+        }
     }
     else {
         $card = "SELECT `prix` FROM `produits` WHERE idpro =".$idpro;
@@ -53,15 +62,16 @@ if(isset($_SESSION['user']) && isset($_GET['idpro'])){
 
         $prod=$pdostmt->fetch(PDO::FETCH_ASSOC);
 
-        $insertcard = "INSERT INTO `panier`(`id`, `idpro`, `prixunitaire`) VALUES (:id,:idpro,:prix)";
+        $insertcard = "INSERT INTO `panier`(`id`, `idpro`, `prixunitaire`, qte) VALUES (:id,:idpro,:prix,:qte)";
         $cardstmt = $pdo->prepare($insertcard);
         $cardstmt -> bindParam(':id', $idu);
         $cardstmt -> bindParam(':idpro', $idpro);
         $cardstmt -> bindParam(':prix', $prod['prix']);
+        $cardstmt -> bindParam(':qte', $qte);
 
         try{ 
             $cardstmt -> execute();
-            echo 'Enregistrement effectués avec success ! ';
+            echo 'Produit ajouté au panier avec succès ! ';
             header("Location: ../../pages/index.php");
             exit;
         } catch (PDOException $e){

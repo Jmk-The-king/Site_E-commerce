@@ -51,6 +51,22 @@
   <link rel="stylesheet" href="../css/magnific-popup.css">
   <!-- style CSS -->
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+        .main_menu .cart i:after {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #f13d80;
+            width: 14px;
+            height: 14px;
+            right: -8px;
+            top: -8px;
+            content: "<?php if($counter["COUNT(*)"] != 0){ echo $counter["COUNT(*)"]; } ?>";
+            text-align: center;
+            line-height: 15px;
+            font-size: 10px;
+            color: #fff;
+            }
+    </style>
 </head>
 
 <body>
@@ -174,11 +190,11 @@
 							</div>
               <div class="card_area d-flex justify-content-between align-items-center">
                 <div class="product_count">
-                  <span class="inumber-decrement"> <i class="ti-minus"></i></span>
+                  <button class="inumber-decrement btn" name="btnDecrement"> <i class="ti-minus"></i></button>
                   <input class="input-number" type="text" value="1" min="0" max="10">
-                  <span class="number-increment"> <i class="ti-plus"></i></span>
+                  <button class="number-increment btn" name="btnIncrement"> <i class="ti-plus"></i></button>
                 </div>
-                <a href="#" class="btn_3">add to cart</a>
+                <a href="../config/backend/back.php?<?php echo ' idpro='.$idpro;?>" class="btn_3">add to cart</a>
                 <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
               </div>
             </div>

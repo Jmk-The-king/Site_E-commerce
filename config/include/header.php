@@ -28,7 +28,6 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                         <a class="dropdown-item" href="tracking.html">tracking</a>
                                         <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                        <a class="dropdown-item" href="cart.php">shopping cart</a>
                                         <a class="dropdown-item" href="confirmation.html">confirmation</a>
                                         <a class="dropdown-item" href="elements.html">elements</a>
                                     </div>
@@ -50,20 +49,31 @@
                             </ul>
                         </div>
                         <div class="hearer_icon d-flex">
-                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <a href=""><i class="ti-heart"></i><br><p><?php if(isset($_SESSION["user"])){echo $_SESSION["user"];}?></p></a>
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a id="search_1" href="javascript:void(0)"><i class="fas fa-search"></i></a>
+                            <a href=""><i class="ti-heart"></i></a>
+                            <div class="<?php if($counter["COUNT(*)"] != 0){ echo "cart"; }?>">
+                                <a href="cart.php">
                                     <i class="fas fa-cart-plus"></i>
                                 </a>
-                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div> -->
-                                
+                                <!-- 
+                                    <a class="dropdown-toggle" href="cart.php" id="navbarDropdown3" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-cart-plus"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <div class="single_product">
+        
+                                        </div>
+                                    </div> 
+                                -->
                             </div>
+                            <a href="#">
+                                <?php
+                                    if(isset($_SESSION["user"])){
+                                        echo '<i class="fas fa-user"></i>';
+                                    }
+                                ?>
+                            </a>
                         </div>
                     </nav>
                 </div>

@@ -64,6 +64,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="login_part_text text-center">
+                        <div class="login_part_text_overlay"></div>
                         <div class="login_part_text_iner">
                             <h2>You already have account?</h2>
                             <p>There are advances being made in science and technology

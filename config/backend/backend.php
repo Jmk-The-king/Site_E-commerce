@@ -74,7 +74,12 @@ if($_SERVER["REQUEST"] = "POST" && isset($_POST["submit"])){
 
 $comment = "SELECT `comid`, `idpro`, `nomcomplet`, `adressmail`, `phone`, `commentaire`, `time` FROM `commentaire` WHERE idpro = "; 
 
+$panier = "SELECT `nompro`, `prix`,`image`, `isvalid`, `imagemini` FROM `produits` WHERE isvalid = true AND idpro = ";
 
-  
+$paniers = "SELECT * FROM panier";
 
-//$panier = "SELECT `idpro`, `nompro`, `prix`,`image`, `isvalid`, `imagemini` FROM `produits` WHERE isvalid=true AND id";
+$countPan = "SELECT COUNT(*) FROM `panier` WHERE 1";
+
+$stmt = $pdo->prepare($countPan);
+$stmt -> execute();
+$counter = $stmt -> fetch(PDO::FETCH_ASSOC);
