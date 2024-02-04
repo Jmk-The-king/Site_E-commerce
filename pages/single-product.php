@@ -101,12 +101,7 @@
             $pdostmt->execute();
 
             $produit=$pdostmt->fetch(PDO::FETCH_ASSOC);
-
-            // $vustmt = $pdo->prepare($views);
-            // $vustmt->execute(['code'=>$produit['code'],"view"=>$produit['vues']+1]);
-
             if($produit){
-
         ?>
 
   <!--================Single Product Area =================-->
