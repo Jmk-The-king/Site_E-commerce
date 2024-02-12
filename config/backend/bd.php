@@ -4,7 +4,7 @@ Session_start();
 
 class Connect extends PDO{
     const HOST='localhost';
-    const DB='Test01';
+    const DB='olasalama';
     const USER='root';
     const PSW='';
 

@@ -16,7 +16,7 @@
                                     <a class="nav-link" href="index.php">Home</a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a class="nav-link " href="category.php">
+                                    <a class="nav-link " href="catalogue.php">
                                         Shop
                                     </a>
                                 </li>

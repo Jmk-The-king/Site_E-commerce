@@ -1,10 +1,10 @@
 <?php
-    Session_start();
+    // Session_start();
 
-    if(!isset($_SESSION["user"])){
+    /* if(!isset($_SESSION["user"])){
         header("Location: ./login.php");
         exit;
-    }
+    } */
      
     require_once "../config/backend/backend.php";
     $pdo = new Connect();
@@ -206,7 +206,7 @@
                         <div class="col-lg-12">
                             <div class="product_top_bar d-flex justify-content-between align-items-center">
                                 <div class="single_product_menu">
-                                    <p><span>10000 </span> Prodict Found</p>
+                                    <p><span><?php if($countprod["COUNT(*)"] != 0){ echo $countprod["COUNT(*)"]; } ?></span> Prodict Found</p>
                                 </div>
                                 <div class="single_product_menu d-flex">
                                     <h5>short by : </h5>

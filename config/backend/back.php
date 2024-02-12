@@ -4,7 +4,7 @@ Session_start();
 
 class Connect extends PDO{
     const HOST='localhost';
-    const DB='Test01';
+    const DB='olasalama';
     const USER='root';
     const PSW='';
 
@@ -48,7 +48,7 @@ if(isset($_SESSION['user']) && isset($_GET['idpro'])){
         try{
             $vustmt->execute(['idpro'=>$pan['idpro'],"qte"=>$pan['qte']+1]);
             echo 'Produit ajouté au panier avec succès ! ';
-            header("Location: ../../pages/category.php");
+            header("Location: ../../pages/catalogue.php");
             exit;
         } catch (PDOException $e){
             echo "Erreur lors de l'enrgistrement : " . $e->getMessage().' '.$e->getFiles().' '.$e->getLine();
@@ -72,7 +72,7 @@ if(isset($_SESSION['user']) && isset($_GET['idpro'])){
         try{ 
             $cardstmt -> execute();
             echo 'Produit ajouté au panier avec succès ! ';
-            header("Location: ../../pages/category.php");
+            header("Location: ../../pages/catalogue.php");
             exit;
         } catch (PDOException $e){
             echo "Erreur lors de l'enrgistrement : " . $e->getMessage().' '.$e->getFiles().' '.$e->getLine();

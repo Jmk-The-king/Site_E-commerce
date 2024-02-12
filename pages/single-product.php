@@ -4,7 +4,7 @@
     if(!isset($_SESSION["user"]) ){
         header("Location: ./login.php");
         exit;
-    }
+    } 
     $idpro = $_GET["idpro"];
      
     require_once "../config/backend/backend.php";
