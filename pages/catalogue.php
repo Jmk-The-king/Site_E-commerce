@@ -5,7 +5,9 @@
         header("Location: ./login.php");
         exit;
     } */
-     
+    if(isset($_GET['ID'])){
+        $cats = $_GET["ID"];
+    }
     require_once "../config/backend/backend.php";
     $pdo = new Connect();
 
@@ -83,6 +85,42 @@
     </section>
     <!-- breadcrumb start-->
 
+        <!-- product_list part start-->
+        <section class="product_list best_seller mt-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="section_tittle text-center">
+                            <h2>Best Sellers <span>shop</span></h2>
+                        </div>
+                    </div>
+                </div> 
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-lg-12">
+                        <div class="best_product_slider owl-carousel">
+                            <?php  
+
+                                $pdopro = $pdo->prepare($prod2);
+                                $pdopro->execute();
+
+                                while($produit = $pdopro->fetch()){
+                            ?>
+                            <a class="" href="single-product.php?<?php echo 'idpro='.$produit['idpro'];?>">
+                                <div class="single_product_item">
+                                    <img src="<?php echo $produit["image"];?>" alt="">
+                                    <div class="single_product_text">
+                                        <h4><?php echo $produit["nompro"];?></h4>
+                                        <h3><?php echo "$ ".$produit["prix"];?></h3>
+                                    </div>
+                                </div> 
+                            </a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     <!--================Category Product Area =================-->
     <section class="cat_product_area section_padding">
         <div class="container">
@@ -103,7 +141,7 @@
                                         while($ctg = $catstmt->fetch()){
                                     ?>
                                     <li>
-                                        <a href="#"><?php echo $ctg["nom_categorie"]; ?></a>
+                                        <a href="catalogue.php?<?php echo 'ID='.$ctg['category'];?>"><?php echo $ctg["nom_categorie"]; ?></a>
                                         <span>(<?php echo $ctg["somme_quantite"]; ?>)</span>
                                     </li>
                                     <?php } ?>
@@ -116,7 +154,20 @@
                                 <h3>Product filters</h3>
                             </div>
                             <div class="widgets_inner">
-                                <ul class="list">
+                            <ul class="list">
+                                    <?php
+                                        $catstmt = $pdo->prepare($scat);
+                                        $catstmt->execute();
+
+                                        while($sctg = $catstmt->fetch()){
+                                    ?>
+                                    <li>
+                                        <a href="catalogue.php?<?php echo 'IDsc='.$sctg['id_sc'];?>"><?php echo $sctg["sous_nom"]; ?></a>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                                <!--
+                                    <ul class="list">
                                     <li>
                                         <a href="#">Apple</a>
                                     </li>
@@ -132,24 +183,8 @@
                                     <li>
                                         <a href="#">Samsung</a>
                                     </li>
-                                </ul>
-                                <ul class="list">
-                                    <li>
-                                        <a href="#">Apple</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Asus</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">Gionee</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Micromax</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Samsung</a>
-                                    </li>
-                                </ul>
+                                    </ul>
+                                -->
                             </div>
                         </aside>
 
@@ -243,10 +278,16 @@
                     </div>
 
                     <div class="row align-items-center latest_product_inner">
-                        <?php 
-                            $pdopro = $pdo->prepare($prod);
-                            $pdopro->execute();
-
+                        <?php
+                        
+                            if(isset($cats)){
+                                $pdopro = $pdo->prepare($selecat.$cats);
+                                $pdopro->execute(); 
+                            }
+                            else{
+                                $pdopro = $pdo->prepare($prod);
+                                $pdopro->execute();
+                            }
                             while($produit = $pdopro->fetch()){
                         ?>
                             
@@ -270,40 +311,6 @@
     </section>
     <!--================End Category Product Area =================-->
 
-    <!-- product_list part start-->
-    <section class="product_list best_seller">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="section_tittle text-center">
-                        <h2>Best Sellers <span>shop</span></h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center justify-content-between">
-                <div class="col-lg-12">
-                    <div class="best_product_slider owl-carousel">
-                        <?php  
-                            $pdopro = $pdo->prepare($prod2);
-                            $pdopro->execute();
-
-                            while($produit = $pdopro->fetch()){
-                        ?>
-                        <a class="" href="single-product.php?<?php echo 'idpro='.$produit['idpro'];?>">
-                            <div class="single_product_item">
-                                <img src="<?php echo $produit["image"];?>" alt="">
-                                <div class="single_product_text">
-                                    <h4><?php echo $produit["nompro"];?></h4>
-                                    <h3><?php echo "$ ".$produit["prix"];?></h3>
-                                </div>
-                            </div>
-                        </a>
-                        <?php }?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- product_list part end-->
 
     <!--::footer_part start::-->

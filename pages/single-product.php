@@ -100,7 +100,7 @@
             $pdostmt->bindParam(':code',$idpro);
             $pdostmt->execute();
 
-            $produit=$pdostmt->fetch(PDO::FETCH_ASSOC);
+            $produit = $pdostmt -> fetch(PDO::FETCH_ASSOC);
             if($produit){
         ?>
 
@@ -202,7 +202,7 @@
 
   <?php }
           else{
-            echo 'produit non trouvé !';
+            echo 'produit non trouvé !<br>';
           }
         ?>
 

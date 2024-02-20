@@ -22,6 +22,7 @@
     <link rel="icon" href="../img/favicon.png">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" />
     <!-- animate CSS -->
     <link rel="stylesheet" href="../css/animate.css">
     <!-- owl carousel CSS -->

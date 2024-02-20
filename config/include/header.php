@@ -23,13 +23,18 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
                                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        pages
+                                        Catégories
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                        <a class="dropdown-item" href="tracking.html">tracking</a>
-                                        <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                        <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                        <a class="dropdown-item" href="elements.html">elements</a>
+                                    <div class="row">
+                                    <div class="dropdown-menu row" aria-labelledby="navbarDropdown_2">
+                                        <?php $menustmt = $pdo -> prepare($smenu);
+                                              $menustmt -> execute(); 
+                                              
+                                              while($menu = $menustmt -> fetch()){
+                                              ?>
+                                        <a class="dropdown-item" href="catalogue.php?<?php echo 'ID='.$menu['category'];?>"> <?php echo $menu['nomcat'];?> </a>
+                                        <?php } ?>
+                                    </div>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
