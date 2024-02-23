@@ -8,6 +8,9 @@
     if(isset($_GET['ID'])){
         $cats = $_GET["ID"];
     }
+    if(isset($_GET["IDsc"])){
+        $scats = $_GET["IDsc"];
+    }
     require_once "../config/backend/backend.php";
     $pdo = new Connect();
 
@@ -283,6 +286,10 @@
                             if(isset($cats)){
                                 $pdopro = $pdo->prepare($selecat.$cats);
                                 $pdopro->execute(); 
+                            }
+                            elseif(isset($scats)){
+                                $pdopro = $pdo-> prepare($prod1.$scats);
+                                $pdopro -> execute();
                             }
                             else{
                                 $pdopro = $pdo->prepare($prod);

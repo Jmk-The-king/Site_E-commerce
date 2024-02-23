@@ -21,7 +21,8 @@ $pdo = new Connect();
 
 // Requetes utilisées dans index.php 
 
-$prod1 = "SELECT * from produits where isvalid = true";
+$prods1 = "SELECT * from produits where isvalid = true LIMIT 8";
+$prods2 = "SELECT * from produits where isvalid = true AND idpro>8 LIMIT 8";
 
 // Requetes utilisées dans catalogue.php
 
