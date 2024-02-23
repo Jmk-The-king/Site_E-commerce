@@ -19,4 +19,4 @@ $con = new Connexion();
 
 // Selection des Produits pour Le dashbord
 
-$dashbordProd = "SELECT * FROM produits JOIN produits.id_sc = sous_categorie.id_sc WHERE isvalid = 1";
+$dashProd = "SELECT * FROM produits JOIN sous_categorie ON produits.id_sc = sous_categorie.id_sc ORDER BY idpro ASC";
