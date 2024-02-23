@@ -212,7 +212,7 @@
                             <div class="row align-items-center justify-content-between">
 
                                <?php  
-                                    $pdopro = $pdo->prepare($prod1);
+                                    $pdopro = $pdo->prepare($prod2);
                                     $pdopro->execute();
 
                                     while($produit = $pdopro->fetch()){

@@ -359,8 +359,9 @@
 
       <h2 class="d-flex justify-content-between align-items-center px-3 mt-1 mb-1 ">
           <span>Produits</span>
-          <a class="" href="#" aria-label="Add a new report">
-            <h3><svg class="bi"><use xlink:href="#plus-circle"/></svg>4</h3>
+          <a class="btn btn-outline-primary" href="#" aria-label="Add a new report" >
+            <svg class="bi"><use xlink:href="#plus-circle"/></svg>
+            Ajouter
           </a>
       </h2>
       <div class="table-responsive small">
@@ -377,6 +378,10 @@
               <th scope="col">Action</th>
             </tr>
           </thead>
+
+          <?php
+            $
+          ?>
           <tbody>
             <tr>
               <td>1,001</td>

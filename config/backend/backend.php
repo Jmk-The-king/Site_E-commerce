@@ -31,7 +31,7 @@ $cat = "SELECT categories.category, categories.nomcat AS nom_categorie, SUM(IFNU
 $scat = "SELECT sous_categorie.id_sc, sous_categorie.nom_sc AS sous_nom FROM produits INNER JOIN sous_categorie ON produits.id_sc = sous_categorie.id_sc GROUP BY sous_categorie.id_sc, sous_categorie.nom_sc";
 
 $prod = "SELECT * FROM produits WHERE isvalid=true LIMIT 25"; 
-$prod1 = "SELECT * FROM produits WHERE isvalid=true AND category = "; 
+$prod1 = "SELECT * FROM produits WHERE isvalid=true AND id_sc = "; 
 
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["search"])){                                        
     //$search = ;

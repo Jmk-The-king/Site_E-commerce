@@ -97,7 +97,6 @@
   <?php
             $query = $query . $idpro;
             $pdostmt=$pdo->prepare($query);
-            $pdostmt->bindParam(':code',$idpro);
             $pdostmt->execute();
 
             $produit = $pdostmt -> fetch(PDO::FETCH_ASSOC);
