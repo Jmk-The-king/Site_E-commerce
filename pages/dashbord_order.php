@@ -23,6 +23,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
     <title>Dashboard Template · Bootstrap v5.3</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="../css/dashboard.css" rel="stylesheet">
     <link href="../css/dashboard.rtl.css" rel="stylesheet">
@@ -256,7 +257,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="dashbord_order.php">
+              <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <svg class="bi"><use xlink:href="#file-earmark"/></svg>
                 Orders
               </a>
@@ -355,18 +356,16 @@
         </div>
       </div>
 
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-      <!-- Liste des produits de la Boutique -->
+      <!-- Liste des Commandes de la Boutique -->
       <h2 class="d-flex justify-content-between align-items-center px-3 mt-1 mb-1 ">
-          <span>Produits</span>
+          <span>Commandes </span>
           <a class="btn btn-outline-primary" href="#" aria-label="Add a new report" >
             <svg class="bi"><use xlink:href="#plus-circle"/></svg>
             Ajouter
           </a>
       </h2>
       <div class="table-responsive">
-        <table class="table" id="produit">
+        <table class="table" id="commande">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -388,7 +387,7 @@
               while($product = $dashbordpro -> fetch()){
             ?>
             
-            <tr disabled>
+            <tr>
               <td><?php echo $product["idpro"]; ?></td>
               <td><img src="<?php echo $product["image"];?>" alt="" style="width: 30px;" ></td>
               <td><?php echo $product["nompro"]; ?></td>
@@ -427,13 +426,13 @@
               <div class="modal-body">
                 <p class="lead text-center">
                   
-                  Etes vous sur de voulloir supprimer ce produit ?
+                  Etes vous sur de voulloir supprimer cette commande ?
                 </p>
               </div>
               <div class="modal-footer">
-                <form action="../config/backend/dashbord_back.php" method="post">
+                <form action="" method="post">
                   <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="Annuler">
-                  <input type="submit" class="btn btn-outline-danger" value="Supprimer" name="delete" id="delete">
+                  <input type="submit" class="btn btn-outline-danger" value="Supprimer">
                 </form>
               </div>
             </div>

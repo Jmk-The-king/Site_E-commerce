@@ -1,3 +1,20 @@
+<style>
+        .main_menu .cart i:after {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #f13d80;
+            width: 14px;
+            height: 14px;
+            right: -8px;
+            top: -8px;
+            content: "<?php if($counter["COUNT(*)"] != 0){ echo $counter["COUNT(*)"]; } ?>";
+            text-align: center;
+            line-height: 15px;
+            font-size: 10px;
+            color: #fff;
+            }
+    </style>
+
 <header class="main_menu home_menu">
         <div class="container">
             <div class="row align-items-center">
@@ -57,7 +74,7 @@
                             <a id="search_1" href="javascript:void(0)"><i class="fas fa-search"></i></a>
                             <a href=""><i class="ti-heart"></i></a>
                             <div class="<?php if($counter["COUNT(*)"] != 0){ echo "cart"; }?>">
-                                <a href="cart.php">
+                                <a href="panier.php">
                                     <i class="fas fa-cart-plus"></i>
                                 </a>
                                 <!-- 

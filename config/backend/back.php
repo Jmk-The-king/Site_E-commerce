@@ -1,6 +1,6 @@
 <?php
 
-Session_start();
+// Session_start();
 
 class Connect extends PDO{
     const HOST='localhost';
@@ -23,7 +23,7 @@ $pdo = new Connect();
 
 // Ajout au panier  
 
-if(isset($_SESSION['user']) && isset($_GET['idpro'])){
+if(isset($_SESSION['user']) || isset($_GET['idpro'])){
     $idu = $_SESSION['user'];
     $idpro = $_GET['idpro'];
     $qte = 1;
@@ -57,7 +57,6 @@ if(isset($_SESSION['user']) && isset($_GET['idpro'])){
     else {
         $card = "SELECT `prix` FROM `produits` WHERE idpro =".$idpro;
         $pdostmt=$pdo -> prepare($card);
-        $pdostmt->bindParam(':code',$idpro);
         $pdostmt->execute();
 
         $prod=$pdostmt->fetch(PDO::FETCH_ASSOC);

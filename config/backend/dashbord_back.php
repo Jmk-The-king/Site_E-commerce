@@ -20,3 +20,9 @@ $con = new Connexion();
 // Selection des Produits pour Le dashbord
 
 $dashProd = "SELECT * FROM produits JOIN sous_categorie ON produits.id_sc = sous_categorie.id_sc ORDER BY idpro ASC";
+
+// Suppression des produits 
+
+/* if($_SERVER['REQUEST'] & isset($_POST["delete"])){
+
+} */

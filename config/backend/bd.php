@@ -57,7 +57,6 @@ if(isset($_SESSION['user']) && isset($_GET['idpro'])){
     else {
         $card = "SELECT `prix` FROM `produits` WHERE idpro =".$idpro;
         $pdostmt=$pdo -> prepare($card);
-        $pdostmt->bindParam(':code',$idpro);
         $pdostmt->execute();
 
         $prod=$pdostmt->fetch(PDO::FETCH_ASSOC);

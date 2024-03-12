@@ -39,22 +39,7 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="../css/style.css">
 
-    <style>
-        .main_menu .cart i:after {
-            position: absolute;
-            border-radius: 50%;
-            background-color: #f13d80;
-            width: 14px;
-            height: 14px;
-            right: -8px;
-            top: -8px;
-            content: "<?php if($counter["COUNT(*)"] != 0){ echo $counter["COUNT(*)"]; } ?>";
-            text-align: center;
-            line-height: 15px;
-            font-size: 10px;
-            color: #fff;
-            }
-    </style>
+    
 </head>
 
 <body>

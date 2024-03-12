@@ -83,7 +83,7 @@ $comment = "SELECT `comid`, `idpro`, `nomcomplet`, `adressmail`, `phone`, `comme
 
 // Requète pour le panier 
 
-$panier = "SELECT `nompro`, `prix`,`image`, `isvalid`, `imagemini` FROM `produits` WHERE isvalid = true AND idpro = ";
+$panier = "SELECT panier.idpan, panier.qte,produits.prix, produits.idpro, produits.image, produits.nompro FROM `panier` INNER JOIN produits ON panier.idpro = produits.idpro WHERE isvalid = true AND idpan = ";
 
 $paniers = "SELECT * FROM panier";
 
