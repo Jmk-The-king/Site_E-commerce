@@ -2,8 +2,8 @@
     Session_start();
 
     if(!isset($_SESSION["user"])){
-        header("Location: ./login.php");
-        exit;
+       // $_SESSION["user"] = uniquid();
+        // echo $_SESSION["user"];
     }
 
     require_once "../config/backend/backend.php";
